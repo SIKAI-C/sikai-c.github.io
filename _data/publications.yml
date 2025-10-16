@@ -21,10 +21,18 @@ main:
   #   notes: Oral Presentation
   #   image: ./assets/img/teaser_example.png
 
+  - title: "CSI-4CAST: A Hybrid Deep Learning Model for CSI Prediction with Comprehensive Robustness and Generalization Testing"
+    authors: <strong>Cheng, S.</strong>, Zandehshahvar, R., Zhao, H., Garcia-Ulloa, D. A., Villena-Rodriguez, A., Navarro Manchón, C., & Van Hentenryck, P.
+    conference_short: Manuscript submitted for publication
+    conference: Manuscript submitted for publication, 2025.
+    pdf: https://arxiv.org/abs/2510.12996
+    code: https://github.com/AI4OPT/CSI-4CAST
+    image: ./assets/img/pubs/CSI-4CAST.png
+
   - title: "DualSchool: How reliable are LLMs for optimization education?"
     authors: Klamkin, M., Deza, A., <strong>Cheng, S.</strong>, Zhao, H., & Van Hentenryck, P.
-    conference_short: Manuscript under review
-    conference: Manuscript under review, 2025.
+    conference_short: Manuscript submitted for publication
+    conference: Manuscript submitted for publication, 2025.
     pdf: https://arxiv.org/pdf/2505.21775
     code: https://github.com/AI4OPT/DualSchool
     image: ./assets/img/pubs/DualSchool.png
