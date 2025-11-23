@@ -595,3 +595,149 @@ footer {
   display:none;
   font-family: monospace;
 }
+
+.site-nav {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin: 1rem 0 0.5rem;
+}
+
+.site-nav a {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 999px;
+  padding: 0.25rem 0.9rem;
+  text-decoration: none;
+  font-size: 0.9rem;
+  color: inherit;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.site-nav a:hover {
+  border-color: #337ab7;
+}
+
+.site-nav a.active {
+  background: #337ab7;
+  border-color: #337ab7;
+  color: #fff;
+}
+
+.posts-list {
+  margin: 2rem 0;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.post-card {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  background: rgba(0, 0, 0, 0.02);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.post-card:hover {
+  border-color: #337ab7;
+  transform: translateY(-2px);
+}
+
+.post-card-date {
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #555;
+  margin: 0 0 0.3rem;
+}
+
+.post-card-title {
+  margin: 0 0 0.35rem;
+}
+
+.post-card-title a {
+  text-decoration: none;
+}
+
+.post-card-title a:hover {
+  text-decoration: underline;
+}
+
+.post-card-summary {
+  margin: 0 0 0.7rem;
+  color: #4a4a4a;
+}
+
+.post-card-tags span,
+.post-tags .post-tag {
+  display: inline-block;
+  background: rgba(51, 122, 183, 0.12);
+  color: #1a4b8c;
+  border-radius: 999px;
+  padding: 0.1rem 0.65rem;
+  font-size: 0.8rem;
+  margin: 0 0.3rem 0.3rem 0;
+}
+
+.post {
+  margin-top: 2rem;
+}
+
+.post-back-link {
+  margin-bottom: 1.2rem;
+}
+
+.post-title {
+  margin-bottom: 0.4rem;
+}
+
+.post-subtitle {
+  font-size: 1.05rem;
+  color: #4a4a4a;
+  margin-bottom: 0.6rem;
+}
+
+.post-meta {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 1.25rem;
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.post-content > *:first-child {
+  margin-top: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .post-card {
+    border-color: rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .post-card:hover {
+    border-color: #59a7e9;
+  }
+
+  .post-card-date,
+  .post-card-summary,
+  .post-meta {
+    color: #cfd2d6;
+  }
+
+  .post-card-tags span,
+  .post-tags .post-tag {
+    background: rgba(94, 158, 230, 0.2);
+    color: #d8ecff;
+  }
+
+  .site-nav a {
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .site-nav a.active {
+    background: #59a7e9;
+    border-color: #59a7e9;
+    color: #041527;
+  }
+}

@@ -35,6 +35,8 @@ auto_dark_mode: true
 # You can use this option to choose between Serif or Sans Serif fonts.
 font: "Serif" # or "Sans Serif"
 
+excerpt_separator: "<!--more-->"
+
 # Google Analytics ID
 # Please remove this if you don't use Google Analytics
 google_analytics: UA-111540567-4
@@ -42,6 +44,21 @@ google_analytics: UA-111540567-4
 # Use this project as a remote theme for GitHub Pages
 # See the guide here: https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/adding-a-theme-to-your-github-pages-site-using-jekyll
 remote_theme: yaoyao-liu/minimal-light
+
+collections:
+  posts:
+    output: true
+    permalink: /posts/:title/
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: post
+      author: Sikai Cheng
+      summary:
+      tags: []
 
 # The following files will be removed from the generated website.
 exclude:

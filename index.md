@@ -26,6 +26,9 @@ I have been fortunate to collaborate with [Prof. Xin Chen](https://www.isye.gate
 
 <!-- {% include_relative _includes/services.md %} -->
 
+## Notes & Posts
+
+I sometimes share small observations, favorite tools, or quick experiments on a separate [posts page]({{ '/posts/' | relative_url }}). Feel free to peek there for the latest snippets.
 
 ## Misc.
 
