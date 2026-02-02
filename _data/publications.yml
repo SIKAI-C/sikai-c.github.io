@@ -21,9 +21,16 @@ main:
   #   notes: Oral Presentation
   #   image: ./assets/img/teaser_example.png
 
+  - title: "Plan, Verify and Fill: A Structured Parallel Decoding Approach for Diffusion Language Models"
+    authors: Li, M., Jiang, H., <strong>Cheng, S.</strong>, Fu, H., Cai, Y., Huang, B., Ye, T., Chen, X., & Van Hentenryck, P.
+    conference_short: Submitted for publication
+    conference: Manuscript submitted for publication, 2026.
+    pdf: https://arxiv.org/abs/2601.12247
+    image: ./assets/img/pubs/pvf.png
+
   - title: "CSI-4CAST: A Hybrid Deep Learning Model for CSI Prediction with Comprehensive Robustness and Generalization Testing"
     authors: <strong>Cheng, S.</strong>, Zandehshahvar, R., Zhao, H., Garcia-Ulloa, D. A., Villena-Rodriguez, A., Navarro Manchón, C., & Van Hentenryck, P.
-    conference_short: Manuscript submitted for publication
+    conference_short: Submitted for publication
     conference: Manuscript submitted for publication, 2025.
     pdf: https://arxiv.org/abs/2510.12996
     code: https://github.com/AI4OPT/CSI-4CAST
@@ -31,7 +38,7 @@ main:
 
   - title: "DualSchool: How reliable are LLMs for optimization education?"
     authors: Klamkin, M., Deza, A., <strong>Cheng, S.</strong>, Zhao, H., & Van Hentenryck, P.
-    conference_short: Manuscript submitted for publication
+    conference_short: Submitted for publication
     conference: Manuscript submitted for publication, 2025.
     pdf: https://arxiv.org/pdf/2505.21775
     code: https://github.com/AI4OPT/DualSchool
