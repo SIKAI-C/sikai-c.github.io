@@ -8,7 +8,7 @@ I am a Ph.D. student in Machine Learning at the [Georgia Institute of Technology
 
 Before beginning my Ph.D., I earned a Master’s degree in **Operations Research** from the [H. Milton Stewart School of Industrial and Systems Engineering (ISyE)](https://www.isye.gatech.edu/) at Georgia Tech, and a Bachelor’s degree in **Data Science** from [The Chinese University of Hong Kong, Shenzhen](https://sds.cuhk.edu.cn/en).
 
-I have been fortunate to collaborate with [Prof. Xin Chen](https://www.isye.gatech.edu/users/xin-chen) during my master’s studies, as well as [Dr. Xinyun Chen](https://sds.cuhk.edu.cn/en/teacher/63) and [Dr. Pengyi Shi](https://web.ics.purdue.edu/~shi178/) during my undergraduate studies.
+I have been fortunate to collaborate with [Prof. Xin Chen](https://www.isye.gatech.edu/users/xin-chen) during my master’s studies, as well as [Prof. Xinyun Chen](https://sds.cuhk.edu.cn/en/teacher/63) and [Prof. Pengyi Shi](https://web.ics.purdue.edu/~shi178/) during my undergraduate studies.
 
 <!-- ## Research Interests
 
