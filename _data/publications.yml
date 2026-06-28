@@ -21,6 +21,21 @@ main:
   #   notes: Oral Presentation
   #   image: ./assets/img/teaser_example.png
 
+  - title: "Toward Reliable Generative AI with Conformal Prediction: A Survey"
+    authors: Bruys, T., <strong>Cheng, S.</strong>, Moradi, A., Van Hentenryck, P., & Zandehshahvar, R.
+    conference_short: Submitted for publication
+    conference: Manuscript submitted for publication, 2026.
+    pdf: https://repository.gatech.edu/entities/publication/a47f2a76-9034-4343-b3eb-792038705235
+    image: ./assets/img/pubs/cp_survey.png
+
+  - title: "SkillsBench: Benchmarking How Well Agent Skills Work Across Diverse Tasks"
+    authors: Li, X. et al. (77 authors, including <strong>Cheng, S.</strong>)
+    conference_short: Submitted for publication
+    conference: Manuscript submitted for publication, 2026.
+    pdf: https://arxiv.org/pdf/2602.12670
+    code: https://github.com/benchflow-ai/skillsbench
+    image: ./assets/img/pubs/skillsbench.png
+
   - title: "Plan, Verify and Fill: A Structured Parallel Decoding Approach for Diffusion Language Models"
     authors: Li, M., Jiang, H., <strong>Cheng, S.</strong>, Fu, H., Cai, Y., Huang, B., Ye, T., Chen, X., & Van Hentenryck, P.
     conference_short: Submitted for publication
@@ -30,16 +45,17 @@ main:
 
   - title: "CSI-4CAST: A Hybrid Deep Learning Model for CSI Prediction with Comprehensive Robustness and Generalization Testing"
     authors: <strong>Cheng, S.</strong>, Zandehshahvar, R., Zhao, H., Garcia-Ulloa, D. A., Villena-Rodriguez, A., Navarro Manchón, C., & Van Hentenryck, P.
-    conference_short: Submitted for publication
-    conference: Manuscript submitted for publication, 2025.
-    pdf: https://arxiv.org/abs/2510.12996
+    conference_short: TMLCN
+    conference: IEEE Transactions on Machine Learning in Communications and Networking <strong>(TMLCN)</strong>, 2026.
+    pdf: https://ieeexplore.ieee.org/document/11526994
     code: https://github.com/AI4OPT/CSI-4CAST
+    dataset: https://huggingface.co/CSI-4CAST
     image: ./assets/img/pubs/CSI-4CAST.png
 
   - title: "DualSchool: How reliable are LLMs for optimization education?"
     authors: Klamkin, M., Deza, A., <strong>Cheng, S.</strong>, Zhao, H., & Van Hentenryck, P.
-    conference_short: Submitted for publication
-    conference: Manuscript submitted for publication, 2025.
+    conference_short: Preprint
+    conference: Preprint, 2025.
     pdf: https://arxiv.org/pdf/2505.21775
     code: https://github.com/AI4OPT/DualSchool
     image: ./assets/img/pubs/DualSchool.png

@@ -24,15 +24,7 @@ I have been fortunate to collaborate with [Prof. Xin Chen](https://www.isye.gate
 
 {% include_relative _includes/publications.md %}
 
-<!-- {% include_relative _includes/services.md %} -->
-
-## Notes & Posts
-
-I sometimes share small observations, favorite tools, or quick experiments on a separate [posts page]({{ '/posts/' | relative_url }}). Feel free to peek there for the latest snippets.
-
-## Misc.
-
-I’ve always loved sports 🤸. I practiced wrestling 🤼 and powerlifting 🏋️ with full passion, got hit with some major injuries 😅, fought my way back 💪, and—no surprise—I still can’t stay away from sports. These days I enjoy trying all kinds of activities — archery 🏹, bowling 🎳, paddleboarding 🏄, and regular gym training 💪. I’ve also wrestled with attention and reading/writing disorders for years, collecting tons of practical tips (happy to share ✍️✨). Since GPT arrived, my writing block has basically vanished — thanks, GPT 🤖❤️. And honestly, I like many kinds of noise, just like this “noisy” sentence 🎶😜.
+{% comment %} {% include_relative _includes/services.md %} {% endcomment %}
 
 <!-- ## Pageviews
 

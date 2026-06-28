@@ -1,14 +1,16 @@
-# Basic Information 
+# Basic Information
 title: Sikai Cheng
 position: Ph.D. Student in ML
 affiliation: Georgia Institute of Technology
+affiliation_link: https://www.gatech.edu/
 email: sikaicheng@gatech.edu
 
 # Search Engine Optimization (SEO)
 # The following information is used to improve the website traffic from search engines, e.g., Google.
-keywords: minimal light
-description: The Minimal Light is a simple and elegant jekyll theme for academic personal homepage.
-canonical: https://minimal-light-theme.yliu.me/
+keywords: Sikai Cheng, machine learning, optimization, Georgia Tech, Ph.D., operations research, reinforcement learning, large language models
+description: Sikai Cheng is a Ph.D. student in Machine Learning at the Georgia Institute of Technology, working on machine learning and its integration with optimization.
+canonical: https://sikai-c.github.io/
+url: https://sikai-c.github.io
 
 # Links 
 # If you don't need one of them, you may delete the corresponding line.
@@ -35,26 +37,9 @@ auto_dark_mode: true
 # You can use this option to choose between Serif or Sans Serif fonts.
 font: "Serif" # or "Sans Serif"
 
-excerpt_separator: "<!--more-->"
-
 # Google Analytics ID
 # Please remove this if you don't use Google Analytics
-google_analytics: UA-111540567-4
-
-collections:
-  posts:
-    output: true
-    permalink: /posts/:title/
-
-defaults:
-  - scope:
-      path: ""
-      type: "posts"
-    values:
-      layout: post
-      author: Sikai Cheng
-      summary:
-      tags: []
+# google_analytics: UA-111540567-4
 
 # The following files will be removed from the generated website.
 exclude:
