@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sikai Cheng</title>
+<meta name="description" content="Sikai Cheng — Ph.D. student in Machine Learning at the Georgia Institute of Technology, working on machine learning and its integration with optimization." />
+<meta name="theme-color" content="#F7F9EF" />
+<link rel="icon" href="assets/img/favicon.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,400..600&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600&display=swap" />
+
+<style>
+/* ============================================================
+   Sikai Cheng — personal homepage
+   Palette: very pale yellow-green ground, near-black text, blue accent.
+   ============================================================ */
+
+:root {
+  /* Very pale yellow-green ground, near-black text,
+     saturated blue for links and emphasis. */
+  --paper:      #F7F9EF;
+  --paper-deep: #EFF3E1;
+  --card:       #FCFDF7;
+  --ink:        #101619;
+  --ink-2:      #2A343A;
+  --muted:      #5F6960;
+  --rule:       #DCE2CE;
+  --rule-soft:  #E9EDDF;
+  --accent:     #185C96;
+  --accent-ink: #10426B;
+  --accent-soft:#E3EDF7;
+  --flag:       #185C96;
+  --flag-soft:  #E3EDF7;
+  --mark:       #D8E8F5;
+  --shade:      rgba(16, 22, 25, .11);
+  --shadow:     0 1px 2px rgba(16, 22, 25, .05), 0 8px 24px -18px rgba(16, 22, 25, .32);
+
+  --serif: "Newsreader", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --sans:  "Switzer", "Avenir Next", "Segoe UI", Helvetica, sans-serif;
+  --mono:  "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --measure: 66ch;
+  --rail: 21.5rem;
+  --avatar: 128px;
+  --gap: clamp(2rem, 4.4vw, 4.25rem);
+  --pad: clamp(1.25rem, 4.5vw, 3rem);
+  --radius: 3px;
+
+  color-scheme: light;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink-2);
+  font-family: var(--serif);
+  font-optical-sizing: auto;
+  font-size: 1rem;
+  line-height: 1.62;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--serif);
+  color: var(--ink);
+  font-weight: 500;
+  line-height: 1.18;
+  letter-spacing: -0.011em;
+  text-wrap: balance;
+  margin: 0;
+}
+
+p { margin: 0; }
+
+a { color: inherit; }
+
+/* ---------- shared utilities ---------- */
+
+
+.meta {
+  font-family: var(--sans);
+  font-size: .8125rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+}
+
+.num { font-variant-numeric: tabular-nums; }
+
+:where(a, button, input, select, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.skip {
+  position: absolute; left: 1rem; top: -4rem; z-index: 60;
+  background: var(--card); color: var(--ink);
+  border: 1px solid var(--rule);
+  padding: .6rem 1rem;
+  font-family: var(--sans); font-size: .875rem;
+  border-radius: var(--radius);
+  transition: top .18s ease;
+}
+.skip:focus { top: 1rem; }
+
+/* ---------- shell ---------- */
+
+.shell {
+  max-width: 78rem;
+  margin: 0 auto;
+  padding: clamp(2rem, 5vw, 3.5rem) var(--pad) 0;
+  display: grid;
+  grid-template-columns: var(--rail) minmax(0, 1fr);
+  gap: 0 var(--gap);
+  align-items: start;
+}
+
+/* ---------- rail : profile + navigation ---------- */
+
+.rail {
+  position: sticky;
+  top: clamp(1.25rem, 3vw, 2.25rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-bottom: 3rem;
+  max-height: calc(100vh - 3rem);
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.ident { display: flex; flex-direction: column; align-items: center; text-align: center; gap: .9rem; }
+.ident__text { min-width: 0; }
+
+.avatar {
+  flex: 0 0 auto;
+  width: var(--avatar); height: var(--avatar);
+  border-radius: 50%;
+  overflow: hidden;
+}
+.avatar svg { display: block; width: 100%; height: 100%; }
+.avatar img { display: block; width: 100%; height: 100%; object-fit: cover;
+              border-radius: 50%; }
+
+.ident__name {
+  font-size: 1.625rem;
+  font-weight: 500;
+  letter-spacing: -0.022em;
+  margin-bottom: .5rem;
+}
+.ident__role {
+  font-family: var(--sans);
+  font-size: .8125rem;
+  line-height: 1.65;
+  color: var(--muted);
+}
+.ident__mail { font-family: var(--sans); font-size: .8125rem; margin-top: .35rem; }
+.ident__mail a {
+  color: var(--ink-2);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 1px;
+  transition: color .16s ease, border-color .16s ease;
+}
+.ident__mail a:hover { color: var(--accent); border-color: var(--accent); }
+.ident__role b { font-weight: 500; color: var(--ink-2); display: block; margin-bottom: .18rem; }
+
+.contact {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: -.15rem;
+}
+.contact a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-2);
+  text-decoration: none;
+  transition: transform .16s ease;
+}
+.contact a:hover { transform: translateY(-1px); }
+.contact svg {
+  flex: 0 0 auto;
+  width: 22px; height: 22px;
+  stroke: var(--ink-2);
+  fill: none;
+  stroke-width: 1.5;
+  transition: stroke .16s ease;
+}
+.contact a:hover svg { stroke: var(--accent); }
+
+/* nav */
+.nav { position: relative; display: flex; flex-direction: column; border-top: 1px solid var(--rule); }
+.nav a {
+  display: flex;
+  align-items: baseline;
+  gap: .7rem;
+  padding: .62rem 0 .62rem .95rem;
+  border-bottom: 1px solid var(--rule-soft);
+  font-family: var(--sans);
+  font-size: .9375rem;
+  color: var(--ink-2);
+  text-decoration: none;
+  position: relative;
+  transition: color .16s ease, padding-left .16s ease, background-color .16s ease;
+}
+.nav a::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 50%;
+  width: 5px; height: 5px;
+  margin-top: -2.5px;
+  background: var(--accent);
+  opacity: 0;
+  transform: scale(.4);
+  transition: opacity .16s ease, transform .16s ease;
+}
+.nav a:hover { color: var(--ink); padding-left: 1.15rem; }
+.nav a[aria-current="page"] { color: var(--ink); font-weight: 500; }
+.nav a[aria-current="page"]::before { opacity: 1; transform: scale(1); }
+.nav__count {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: .6875rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* theme control */
+
+/* ---------- content ---------- */
+
+.content { min-width: 0; padding-bottom: 4rem; }
+
+.view { animation: rise .34s cubic-bezier(.22, .61, .36, 1) both; }
+@keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+.view__head { margin-bottom: 2rem; }
+.view__title {
+  font-size: clamp(1.75rem, 3.6vw, 2.35rem);
+  font-weight: 400;
+  letter-spacing: -0.022em;
+  margin: .35rem 0 .55rem;
+}
+.view__title:focus { outline: none; }
+.view__lede {
+  font-size: 1.0625rem;
+  line-height: 1.62;
+  color: var(--ink-2);
+  max-width: var(--measure);
+}
+
+.block { margin-top: 3rem; }
+.block:first-of-type { margin-top: 0; }
+.block__head {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding-bottom: .6rem;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 1.4rem;
+}
+.block__title { font-size: 1.0625rem; font-weight: 500; letter-spacing: .005em; }
+.block__more { margin-left: auto; }
+
+.prose { max-width: var(--measure); font-size: 1.0625rem; line-height: 1.72; }
+.prose + .prose { margin-top: 1rem; }
+.prose em { font-style: italic; }
+
+.textbtn {
+  appearance: none; background: none; border: 0; cursor: pointer;
+  font-family: var(--sans); font-size: .8125rem;
+  color: var(--muted);
+  display: inline-flex; align-items: center; gap: .4rem;
+  padding: 0;
+  transition: color .16s ease;
+}
+.textbtn:hover { color: var(--accent); }
+.textbtn svg { width: 11px; height: 11px; stroke: currentColor; fill: none; stroke-width: 1.6; transition: transform .2s ease; }
+.textbtn[aria-expanded="true"] svg { transform: rotate(180deg); }
+
+/* news — the whole archive stays in the document and scrolls;
+   a year timeline sits beside it and tracks what is in view */
+.newswrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0 1.35rem;
+  align-items: stretch;
+}
+
+.newsscroll {
+  position: relative;
+  min-width: 0;
+  max-height: clamp(12rem, 30vh, 16rem);
+  overflow-y: auto;
+  padding-right: .6rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--rule) transparent;
+  /* edge shading, so it reads as a continuing list rather than a clipped one */
+  background-image:
+    linear-gradient(to bottom, var(--paper), transparent),
+    linear-gradient(to top, var(--paper), transparent),
+    linear-gradient(to bottom, color-mix(in srgb, var(--shade) 70%, transparent), transparent),
+    linear-gradient(to top, color-mix(in srgb, var(--shade) 70%, transparent), transparent);
+  background-position: top center, bottom center, top center, bottom center;
+  background-repeat: no-repeat;
+  background-size: 100% 26px, 100% 26px, 100% 18px, 100% 18px;
+  background-attachment: local, local, scroll, scroll;
+}
+.newsscroll::-webkit-scrollbar { width: 6px; }
+.newsscroll::-webkit-scrollbar-track { background: transparent; }
+.newsscroll::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 3px; }
+.newsscroll::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+
+.news { list-style: none; margin: 0; padding: 0; }
+.news > li { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); gap: 0 1.25rem; padding: .68rem 0; border-bottom: 1px solid var(--rule-soft); }
+.news > li:last-child { border-bottom: 0; }
+.news__date { font-family: var(--mono); font-size: .75rem; color: var(--muted); font-variant-numeric: tabular-nums; padding-top: .22rem; white-space: nowrap; }
+.news__txt { font-size: .9688rem; line-height: 1.55; max-width: 58ch; }
+
+/* year timeline — a hairline rule with compact markers hung off it */
+.years {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: .35rem;
+  min-width: 4.5rem;
+  border-left: 1px solid var(--rule);
+  padding: .2rem 0 .2rem 1.05rem;
+}
+.year {
+  position: relative;
+  appearance: none; background: none; border: 0; cursor: pointer;
+  display: flex; align-items: baseline; gap: .45rem;
+  padding: .25rem 0;
+  font-family: var(--mono);
+  font-size: .75rem;
+  letter-spacing: .03em;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+  text-align: left;
+  transition: color .18s ease;
+}
+.year::before {
+  content: "";
+  position: absolute; left: -1.05rem; top: 50%;
+  width: 7px; height: 1px; margin-top: -.5px;
+  background: var(--rule);
+  transition: width .18s ease, height .18s ease, background-color .18s ease;
+}
+.year:hover { color: var(--ink-2); }
+.year:hover::before { width: 11px; background: var(--muted); }
+.year[aria-current] { color: var(--ink); font-weight: 500; }
+.year[aria-current]::before { width: 15px; height: 2px; margin-top: -1px; background: var(--accent); }
+.year__n { font-size: .625rem; color: var(--muted); opacity: .8; }
+.year[aria-current] .year__n { color: var(--accent); opacity: 1; }
+
+/* publications */
+.pubs { display: flex; flex-direction: column; }
+.yeargroup + .yeargroup { margin-top: 2.25rem; }
+.yeargroup__h {
+  font-family: var(--mono);
+  font-size: .75rem;
+  letter-spacing: .12em;
+  color: var(--muted);
+  font-weight: 500;
+  padding-bottom: .5rem;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: .35rem;
+  display: flex; align-items: baseline; gap: .75rem;
+  font-variant-numeric: tabular-nums;
+}
+.yeargroup__n { margin-left: auto; opacity: .7; }
+
+.pub {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr);
+  gap: 0 1.25rem;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.pub:last-child { border-bottom: 0; }
+.pub__id {
+  font-family: var(--mono);
+  font-size: .8125rem;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: .03em;
+  padding-top: .26rem;
+}
+.pub__body { min-width: 0; display: flex; flex-direction: column; gap: .3rem; }
+.pub__title { font-size: 1.0625rem; font-weight: 500; line-height: 1.34; color: var(--ink); }
+.pub__title mark { background: var(--mark); color: inherit; padding: 0 .12em; border-radius: 2px; }
+.pub__authors { font-family: var(--sans); font-size: .8438rem; color: var(--muted); line-height: 1.5; }
+.me {
+  color: var(--ink);
+  font-weight: 600;
+  border-bottom: 1.5px solid var(--accent);
+  padding-bottom: .5px;
+}
+.pub__venue { font-family: var(--serif); font-size: .9375rem; color: var(--ink-2); }
+.pub__venue i { font-style: italic; }
+.pub__meta {
+  font-family: var(--mono);
+  font-size: .6875rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .5rem;
+  margin-top: .05rem;
+}
+.pub__sep { opacity: .5; }
+.pub__links { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .45rem; }
+.pill {
+  font-family: var(--sans);
+  font-size: .75rem;
+  color: var(--muted);
+  text-decoration: none;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: .15rem .6rem .2rem;
+  transition: border-color .16s ease, color .16s ease, background-color .16s ease;
+}
+.pill:hover { color: var(--accent-ink); border-color: var(--accent); background: var(--accent-soft); }
+
+/* filters */
+.filters {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) minmax(0, 1fr);
+  gap: .85rem;
+  padding: 1.05rem;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  margin-bottom: 1.1rem;
+}
+.field { display: flex; flex-direction: column; gap: .3rem; min-width: 0; }
+.field > label { font-family: var(--mono); font-size: .625rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.field input, .field select {
+  font-family: var(--sans);
+  font-size: .875rem;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: .48rem .6rem;
+  width: 100%;
+  min-width: 0;
+  transition: border-color .16s ease, background-color .16s ease;
+}
+.field input::placeholder { color: var(--muted); opacity: .8; }
+.field input:hover, .field select:hover { border-color: var(--muted); }
+.field select {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position: calc(100% - 15px) 55%, calc(100% - 10px) 55%;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 1.9rem;
+  cursor: pointer;
+}
+.results {
+  display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap;
+  padding-bottom: 1.25rem;
+}
+.empty {
+  padding: 2.5rem 1.25rem;
+  text-align: center;
+  border: 1px dashed var(--rule);
+  border-radius: var(--radius);
+  color: var(--muted);
+  font-size: .9375rem;
+}
+
+/* definition-style lists (cv, mentoring) */
+.deflist { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr); gap: 0; }
+.deflist > dt {
+  font-family: var(--mono); font-size: .6875rem; letter-spacing: .06em;
+  color: var(--muted); padding: .8rem 0; border-top: 1px solid var(--rule-soft);
+  font-variant-numeric: tabular-nums;
+}
+.deflist > dd {
+  margin: 0; padding: .8rem 0; border-top: 1px solid var(--rule-soft); font-size: .9375rem; line-height: 1.55;
+}
+.deflist > dd b { font-weight: 500; color: var(--ink); }
+.deflist > dd span { display: block; font-family: var(--sans); font-size: .8125rem; color: var(--muted); margin-top: .12rem; }
+.deflist > dt:first-of-type, .deflist > dd:first-of-type { border-top: 0; }
+
+/* buttons */
+.btn {
+  appearance: none; cursor: pointer;
+  font-family: var(--sans); font-size: .875rem; font-weight: 500;
+  color: var(--card); background: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  padding: .6rem 1.1rem;
+  display: inline-flex; align-items: center; gap: .5rem;
+  transition: opacity .18s ease, transform .18s ease;
+}
+.btn:hover { opacity: .88; }
+.btn:active { transform: translateY(1px); }
+.btn svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 1.6; }
+
+/* footer */
+.foot {
+  border-top: 1px solid var(--rule);
+  background: var(--paper-deep);
+  margin-top: 2rem;
+}
+.foot__in {
+  max-width: 78rem;
+  margin: 0 auto;
+  padding: 1.5rem var(--pad) 2.25rem;
+  display: flex; flex-wrap: wrap; gap: .6rem 2rem; align-items: baseline;
+}
+.foot__txt { font-family: var(--sans); font-size: .8125rem; line-height: 1.6; color: var(--muted); max-width: 62ch; }
+.foot__txt b { color: var(--ink-2); font-weight: 600; }
+.foot__stamp { margin-left: auto; font-family: var(--mono); font-size: .6875rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); opacity: .8; white-space: nowrap; }
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 60rem) {
+  :root { --rail: 100%; }
+  .shell { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+  .rail {
+    position: static;
+    max-height: none;
+    overflow: visible;
+    padding-bottom: 0;
+    gap: 1.35rem;
+  }
+  .ident { align-items: center; gap: 1.4rem; }
+  .ident__text { padding-top: 0; }
+  .bio { max-width: var(--measure); }
+  .contact { flex-direction: row; flex-wrap: wrap; gap: .5rem 1.5rem; }
+  .nav {
+    flex-direction: row;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin: 0 calc(var(--pad) * -1);
+    padding: 0 var(--pad);
+  }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav a {
+    padding: .75rem 0;
+    margin-right: 1.4rem;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+  }
+  .nav a:hover { padding-left: 0; }
+  .nav a::before { display: none; }
+  .nav a[aria-current="page"] { border-bottom-color: var(--accent); }
+  .nav__count { margin-left: .45rem; }
+  .filters { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .filters .field:first-child { grid-column: 1 / -1; }
+}
+
+/* narrow: the archive flows with the page and the timeline becomes a
+   horizontally scrollable chip strip, sticky only within the News section */
+@media (max-width: 44rem) {
+  .newswrap { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .newsscroll {
+    max-height: none;
+    overflow-y: visible;
+    padding-right: 0;
+    background-image: none;
+  }
+  .years {
+    order: -1;
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    align-self: auto;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: .35rem;
+    min-width: 0;
+    border-left: 0;
+    border-bottom: 1px solid var(--rule);
+    padding: .5rem 0;
+    margin-bottom: .3rem;
+    background: var(--paper);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .years::-webkit-scrollbar { display: none; }
+  .year {
+    flex: 0 0 auto;
+    padding: .28rem .65rem .32rem;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    background: var(--card);
+  }
+  .year::before { display: none; }
+  .year:hover { border-color: var(--muted); }
+  .year[aria-current] {
+    color: var(--accent-ink);
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+}
+
+@media (max-width: 34rem) {
+  .pub { grid-template-columns: minmax(0, 1fr); gap: .25rem; }
+  .pub__id { padding-top: 0; }
+  .news > li { grid-template-columns: minmax(0, 1fr); gap: .15rem; }
+  .news__date { padding-top: 0; }
+  .deflist { grid-template-columns: minmax(0, 1fr); }
+  .deflist > dt { padding-bottom: 0; border-top: 1px solid var(--rule-soft); }
+  .deflist > dd { padding-top: .28rem; border-top: 0; }
+  .deflist > dd:first-of-type { border-top: 0; }
+  .filters { grid-template-columns: minmax(0, 1fr); }
+  :root { --avatar: 93px; }
+  .ident { gap: 1.1rem; }
+  .ident__name { font-size: 1.375rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="shell">
+
+  <!-- ============ RAIL ============ -->
+  <aside class="rail">
+    <div class="ident">
+      <div class="avatar">
+        <img src="assets/img/avatar.png" alt="Sikai Cheng" width="128" height="128" />
+      </div>
+      <div class="ident__text">
+        <h1 class="ident__name">Sikai Cheng</h1>
+        <p class="ident__role">
+          Ph.D. Student in Machine Learning<br />
+          Georgia Institute of Technology
+        </p>
+        <p class="ident__mail"><a href="mailto:sikaicheng@gatech.edu">sikaicheng@gatech.edu</a></p>
+      </div>
+    </div>
+
+    <div class="contact">
+      <a href="https://scholar.google.com/citations?user=cqwBAXoAAAAJ&amp;hl=en" rel="noopener noreferrer" aria-label="Google Scholar" title="Google Scholar">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3L1.5 9 12 15l10.5-6L12 3z" /><path d="M5 11v5c0 1.7 3.1 3 7 3s7-1.3 7-3v-5" /></svg>
+      </a>
+      <a href="assets/files/curriculum_vitae.pdf" aria-label="Curriculum vitae (PDF)" title="Curriculum vitae (PDF)">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6z" /><path d="M14 3v4h4" /><path d="M9 13h6M9 17h6" /></svg>
+      </a>
+      <a href="https://github.com/SIKAI-C" rel="noopener noreferrer" aria-label="GitHub" title="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-4 1.5-4-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.3 4.3 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.3 4.3 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21" /></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/sikai-c" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M7 10v7M7 7v.01M11 17v-4a2 2 0 0 1 4 0v4" /></svg>
+      </a>
+    </div>
+
+    <nav class="nav" aria-label="Sections">
+      <a href="#/home">Home</a>
+      <a href="#/publications">Publications<span class="nav__count"><span class="sr-only">, </span>8<span class="sr-only"> entries</span></span></a>
+      <a href="#/cv">CV</a>
+    </nav>
+
+  </aside>
+
+  <!-- ============ CONTENT ============ -->
+  <main class="content" id="main">
+
+    <!-- ---------- HOME ---------- -->
+    <section class="view" id="view-home" aria-labelledby="t-home">
+      <header class="view__head">
+        <h2 class="view__title" id="t-home" tabindex="-1">About me</h2>
+        <p class="view__lede">
+          I am a Ph.D. student in Machine Learning at the
+          <a href="https://www.gatech.edu/" rel="noopener noreferrer">Georgia Institute of Technology</a>,
+          advised by <a href="https://sites.gatech.edu/pascal-van-hentenryck/" rel="noopener noreferrer">Prof. Pascal Van Hentenryck</a>.
+          My research focuses on machine learning and its integration with optimization. I have made
+          several attempts in applying these methods to large-scale transportation systems,
+          wireless communications, and robust decision-making under uncertainty. In addition, I explore the
+          reasoning capabilities of large language models and investigate reinforcement learning approaches
+          for multi-agent systems.
+        </p>
+      </header>
+
+      <section class="block" aria-labelledby="b-background">
+        <h3 class="sr-only" id="b-background">Background</h3>
+        <p class="prose">
+          Before beginning my Ph.D., I earned a Master's degree in Operations Research from the
+          <a href="https://www.isye.gatech.edu/" rel="noopener noreferrer">H. Milton Stewart School of Industrial and Systems Engineering (ISyE)</a>
+          at Georgia Tech, and a Bachelor's degree in Data Science from
+          <a href="https://sds.cuhk.edu.cn/en" rel="noopener noreferrer">The Chinese University of Hong Kong, Shenzhen</a>.
+        </p>
+        <p class="prose">
+          I have been fortunate to collaborate with
+          <a href="https://www.isye.gatech.edu/users/xin-chen" rel="noopener noreferrer">Prof. Xin Chen</a>
+          during my master's studies, as well as
+          <a href="https://sds.cuhk.edu.cn/en/teacher/63" rel="noopener noreferrer">Prof. Xinyun Chen</a> and
+          <a href="https://web.ics.purdue.edu/~shi178/" rel="noopener noreferrer">Prof. Pengyi Shi</a>
+          during my undergraduate studies.
+        </p>
+      </section>
+
+      <section class="block" aria-labelledby="b-news">
+        <div class="block__head">
+          <h3 class="block__title" id="b-news">News</h3>
+          <p class="meta block__more" id="newsMeta"></p>
+        </div>
+        <div class="newswrap">
+          <div class="newsscroll" id="newsScroll" role="region" aria-labelledby="b-news">
+            <ul class="news" id="newsList"></ul>
+          </div>
+          <div class="years" id="yearNav" role="group" aria-label="Jump to a year in the news archive"></div>
+        </div>
+      </section>
+
+      <section class="block" aria-labelledby="b-selected">
+        <div class="block__head">
+          <h3 class="block__title" id="b-selected">Selected publications</h3>
+          <a class="textbtn block__more" href="#/publications">
+            Full list (8)
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg>
+          </a>
+        </div>
+        <div class="pubs" id="selectedPubs"></div>
+      </section>
+    </section>
+
+
+    <!-- ---------- PUBLICATIONS ---------- -->
+    <section class="view" id="view-publications" aria-labelledby="t-publications" hidden>
+      <header class="view__head">
+        <h2 class="view__title" id="t-publications" tabindex="-1">Publications</h2>
+        <p class="view__lede">
+          Journal articles, conference papers and preprints, newest first.
+        </p>
+      </header>
+
+      <div class="pubs" id="pubList"></div>
+    </section>
+
+
+
+    <!-- ---------- CV ---------- -->
+    <!-- ---------- CV ---------- -->
+    <section class="view" id="view-cv" aria-labelledby="t-cv" hidden>
+      <header class="view__head">
+        <h2 class="view__title" id="t-cv" tabindex="-1">Curriculum vitae</h2>
+        <p class="view__lede">
+          A short summary of education, experience and awards. The full CV is available as a PDF.
+        </p>
+      </header>
+
+      <section class="block">
+        <a class="btn" href="assets/files/curriculum_vitae.pdf" id="cvDownload">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v12M7.5 11l4.5 4.5 4.5-4.5M4.5 19.5h15" /></svg>
+          Download CV (PDF)
+        </a>
+      </section>
+
+      <section class="block" aria-labelledby="cv1">
+        <div class="block__head"><h3 class="block__title" id="cv1">Education</h3></div>
+        <dl class="deflist">
+          <dt>2024 —</dt>
+          <dd><b>Ph.D., Machine Learning</b><span>Georgia Institute of Technology — advised by Prof. Pascal Van Hentenryck</span></dd>
+          <dt>2022 — 2023</dt>
+          <dd><b>M.S., Operations Research</b><span>H. Milton Stewart School of Industrial and Systems Engineering, Georgia Institute of Technology</span></dd>
+          <dt>2018 — 2022</dt>
+          <dd><b>B.S., Statistics (Data Science)</b><span>The Chinese University of Hong Kong, Shenzhen</span></dd>
+        </dl>
+      </section>
+
+      <section class="block" aria-labelledby="cv2">
+        <div class="block__head"><h3 class="block__title" id="cv2">Experience</h3></div>
+        <dl class="deflist">
+          <dt>2026</dt>
+          <dd><b>Applied Scientist Intern</b><span>Amazon, Seattle, WA</span><span>Generative foundation models and AI-agent systems for product substitution</span></dd>
+          <dt>2024 —</dt>
+          <dd><b>Graduate Research Assistant</b><span>NSF AI Institute for Advances in Optimization (AI4OPT), Georgia Institute of Technology</span><span>ML-integrated optimization, large language models, and time-series forecasting</span></dd>
+          <dt>2023</dt>
+          <dd><b>Research Intern</b><span>S.F. Express Co., Ltd., Shenzhen</span><span>Graph neural networks and optimization for vehicle and inventory routing</span></dd>
+          <dt>2021 — 2022</dt>
+          <dd><b>Research Intern</b><span>Parametrix Technology Co., Ltd., Shenzhen</span><span>Multi-agent reinforcement learning and knowledge distillation</span></dd>
+        </dl>
+      </section>
+
+      <section class="block" aria-labelledby="cv3">
+        <div class="block__head"><h3 class="block__title" id="cv3">Awards</h3></div>
+        <dl class="deflist">
+          <dt>2025</dt>
+          <dd><b>Honorary Mention, M&amp;SOM Practice-Based Research Competition</b><span>INFORMS Manufacturing &amp; Service Operations Management Society</span></dd>
+          <dt>2025</dt>
+          <dd><b>ICDM Student Travel Award</b><span>IEEE International Conference on Data Mining</span></dd>
+          <dt>2021, 2022</dt>
+          <dd><b>Undergraduate Research Award</b><span>The Chinese University of Hong Kong, Shenzhen</span></dd>
+          <dt>2020, 2021</dt>
+          <dd><b>Academic Achievement Scholarship</b><span>The Chinese University of Hong Kong, Shenzhen</span></dd>
+        </dl>
+      </section>
+    </section>
+
+  </main>
+</div>
+
+<footer class="foot">
+  <div class="foot__in">
+    <p class="foot__txt">
+      Sikai Cheng — Ph.D. student in Machine Learning, Georgia Institute of Technology.
+    </p>
+    <p class="foot__stamp">Last updated 2026-09</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ============================================================
+     Data — news and publications
+     ============================================================ */
+
+  /* Newest first — the year timeline depends on this order. */
+  /* Dates are the real ones except the last two, which are still approximate. */
+  var NEWS = [
+    { date: "2026-08-21", text: "\"Plan, Verify and Fill\" was accepted to Findings of EMNLP 2026." },
+    { date: "2026-06-25", text: "Our survey on conformal prediction for reliable generative AI is available online and has been submitted for publication." },
+    { date: "2026-05-18", text: "Joined Amazon in Seattle as an Applied Scientist Intern for the summer." },
+    { date: "2026-05-14", text: "CSI-4CAST was accepted to IEEE Transactions on Machine Learning in Communications and Networking." },
+    { date: "2025-11-12", text: "Presented SPOT at IEEE ICDM 2025 and received an ICDM Student Travel Award." },
+    { date: "2025-10-14", text: "Our contextual stochastic optimization paper was published online in Manufacturing & Service Operations Management." },
+    { date: "2025-05-28", text: "DualSchool, a benchmark on LLM reliability for optimization education, was released as a preprint." },
+    { date: "2024-08-19", text: "Started my Ph.D. in Machine Learning at Georgia Tech, advised by Prof. Pascal Van Hentenryck." },
+    { date: "2023-12-15", text: "Completed my M.S. in Operations Research at Georgia Tech." }
+  ];
+
+  var PUBS = [
+    {
+      id: "Under review", year: 2026, topics: ["Generative AI", "Conformal Prediction", "Uncertainty Quantification"],
+      title: "Toward Reliable Generative AI with Conformal Prediction: A Survey",
+      authors: ["Bruys, T.", "Cheng, S.", "Moradi, A.", "Van Hentenryck, P.", "Zandehshahvar, R."],
+      venue: "Manuscript submitted for publication", venueShort: "Preprint",
+      summary: "Surveys conformal prediction methods for generative AI and develops a unified taxonomy spanning open-ended generation, factuality, retrieval-augmented generation, multimodal systems and structured outputs.",
+      links: { PDF: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6963618", Code: "https://github.com/AI4OPT/conformal-prediction-generative-ai" }
+    },
+    {
+      id: "EMNLP Findings", year: 2026, topics: ["Language Models", "Diffusion Models"], featured: true,
+      title: "Plan, Verify and Fill: A Structured Parallel Decoding Approach for Diffusion Language Models",
+      authors: ["Li, M.", "Jiang, H.", "Cheng, S.", "Fu, H.", "Cai, Y.", "Huang, B.", "Chen, Z.", "Ye, T.", "Chen, X.", "Van Hentenryck, P."],
+      venue: "Findings of the Association for Computational Linguistics: EMNLP 2026", venueShort: "EMNLP Findings",
+      summary: "A training-free decoding method for diffusion language models that verifies informative low-confidence tokens, reducing forward passes by 43–65% and raising throughput up to 2.3× at comparable accuracy.",
+      links: { PDF: "https://arxiv.org/abs/2601.12247" }
+    },
+    {
+      id: "TMLCN", year: 2026, topics: ["Forecasting", "Wireless Communications"], featured: true,
+      title: "CSI-4CAST: A Hybrid Deep Learning Model for CSI Prediction with Comprehensive Robustness and Generalization Testing",
+      authors: ["Cheng, S.", "Zandehshahvar, R.", "Zhao, H.", "Garcia-Ulloa, D. A.", "Villena-Rodriguez, A.", "Navarro Manchón, C.", "Van Hentenryck, P."],
+      venue: "IEEE Transactions on Machine Learning in Communications and Networking, vol. 4, pp. 882–912", venueShort: "TMLCN",
+      summary: "A lightweight hybrid deep learning model for 5G channel state information prediction, evaluated for robustness and generalization across thousands of realistic scenarios at up to 5× lower computational cost than an LLM-based predictor.",
+      links: { PDF: "https://ieeexplore.ieee.org/document/11526994", Code: "https://github.com/AI4OPT/CSI-4CAST", Dataset: "https://huggingface.co/CSI-4CAST" }
+    },
+    {
+      id: "Under review", year: 2026, topics: ["Language Models", "AI Agents"],
+      title: "SkillsBench: Benchmarking How Well Agent Skills Work Across Diverse Tasks",
+      authors: ["Li, X.", "Liu, Y.", "Chen, W.", "You, B.", "Di, Z.", "…", "Cheng, S.", "…", "Song, D."],
+      venue: "Manuscript submitted for publication", venueShort: "Preprint",
+      summary: "A large collaborative benchmark measuring how reliably agent skills transfer across a wide range of tasks.",
+      links: { PDF: "https://arxiv.org/abs/2602.12670", Code: "https://github.com/benchflow-ai/skillsbench" }
+    },
+    {
+      id: "ICDM", year: 2025, topics: ["ML + Optimization", "Transportation"], featured: true,
+      title: "SPOT: Spatio-Temporal Pattern Mining and Optimization for Load Consolidation in Freight Transportation Networks",
+      authors: ["Cheng, S.", "Hijazi, A.", "Konak, J.", "Erera, A.", "Van Hentenryck, P."],
+      venue: "Proceedings of the IEEE International Conference on Data Mining (ICDM), acceptance rate 13%", venueShort: "ICDM",
+      summary: "An integrated spatio-temporal pattern-mining and optimization framework for freight load consolidation, reducing transportation cost and travel distance by roughly half on large-scale industrial data.",
+      links: { PDF: "https://arxiv.org/pdf/2504.09680" }
+    },
+    {
+      id: "M&SOM", year: 2025, topics: ["ML + Optimization", "Stochastic Optimization"], featured: true,
+      title: "Contextual stochastic optimization for omnichannel multi-courier order fulfillment under delivery time uncertainty",
+      authors: ["Ye, T.", "Cheng, S.", "Hijazi, A.", "Van Hentenryck, P."],
+      venue: "Manufacturing & Service Operations Management (M&SOM) — Honorary Mention, M&SOM Practice-Based Research Competition", venueShort: "M&SOM",
+      summary: "A contextual stochastic optimization framework that combines distributional delivery-time forecasts with robust order-fulfillment models for omnichannel, multi-courier operations.",
+      links: { PDF: "https://arxiv.org/pdf/2409.06918" }
+    },
+    {
+      id: "Preprint", year: 2025, topics: ["Language Models", "ML + Optimization"],
+      title: "DualSchool: How reliable are LLMs for optimization education?",
+      authors: ["Klamkin, M.", "Deza, A.", "Cheng, S.", "Zhao, H.", "Van Hentenryck, P."],
+      venue: "arXiv preprint arXiv:2505.21775", venueShort: "Preprint",
+      summary: "A benchmark for linear-program dual generation that probes the reasoning and mathematical reliability of large language models in optimization education.",
+      links: { PDF: "https://arxiv.org/abs/2505.21775" }
+    },
+    {
+      id: "NeurIPS WS", year: 2022, topics: ["Reinforcement Learning", "Multi-Agent Systems"],
+      title: "Emergent collective intelligence from massive-agent cooperation and competition",
+      authors: ["Chen, H.", "Tao, S.", "Chen, J.", "Shen, W.", "Li, X.", "Cheng, S.", "Zhu, X.", "Li, X."],
+      venue: "NeurIPS 2022 Deep Reinforcement Learning Workshop", venueShort: "NeurIPS Workshop",
+      summary: "Studies cooperation and competition among massive agent populations in the Lux AI environment, and the collective behaviour that emerges at scale.",
+      links: { PDF: "https://openreview.net/pdf?id=KCWm-HV0PQT", Code: "https://github.com/hanmochen/lux-open" }
+    }
+  ];
+
+  var ME = "Cheng, S.";
+
+  /* ============================================================
+     Small DOM helpers
+     ============================================================ */
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+
+  /* Split text on a query, wrapping matches in <mark>. Text-node based, never innerHTML. */
+  function authorLine(authors) {
+    var wrap = el("p", "pub__authors");
+    authors.forEach(function (name, i) {
+      if (i > 0) wrap.appendChild(document.createTextNode(", "));
+      if (name === ME) {
+        var s = el("span", "me", name);
+        wrap.appendChild(s);
+      } else {
+        wrap.appendChild(document.createTextNode(name));
+      }
+    });
+    return wrap;
+  }
+
+  function pubNode(p) {
+    var row = el("article", "pub");
+
+    var id = el("p", "pub__id", p.id);
+    row.appendChild(id);
+
+    var body = el("div", "pub__body");
+
+    var h = el("h4", "pub__title");
+    h.textContent = p.title;
+    body.appendChild(h);
+
+    body.appendChild(authorLine(p.authors));
+
+    var venue = el("p", "pub__venue");
+    venue.appendChild(el("i", null, p.venue));
+    body.appendChild(venue);
+
+    var meta = el("p", "pub__meta");
+    meta.appendChild(el("span", "num", String(p.year)));
+    p.topics.forEach(function (t) {
+      meta.appendChild(el("span", "pub__sep", "·"));
+      meta.appendChild(el("span", null, t));
+    });
+    body.appendChild(meta);
+
+
+    var links = el("div", "pub__links");
+    Object.keys(p.links).forEach(function (k) {
+      var a = el("a", "pill", k);
+      a.href = p.links[k];
+      a.rel = "noopener noreferrer";
+      links.appendChild(a);
+    });
+    body.appendChild(links);
+
+    row.appendChild(body);
+    return row;
+  }
+
+  /* ============================================================
+     News
+     ============================================================ */
+
+  var newsList = document.getElementById("newsList");
+  var newsScroll = document.getElementById("newsScroll");
+  var yearNav = document.getElementById("yearNav");
+  var newsMeta = document.getElementById("newsMeta");
+  var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+  function prettyDate(iso) {
+    var parts = iso.split("-");
+    return parts[2].replace(/^0/, "") + " " + MONTHS[parseInt(parts[1], 10) - 1] + " " + parts[0];
+  }
+
+  /* Every item stays in the document — nothing is hidden, paged or filtered. */
+  var YEARS = [];
+  var byYear = {};
+
+  NEWS.forEach(function (n) {
+    var y = n.date.slice(0, 4);
+    var li = document.createElement("li");
+    li.setAttribute("data-year", y);
+    var t = el("time", "news__date", prettyDate(n.date));
+    t.setAttribute("datetime", n.date);
+    li.appendChild(t);
+    li.appendChild(el("p", "news__txt", n.text));
+    newsList.appendChild(li);
+
+    if (!byYear[y]) {
+      byYear[y] = { year: y, count: 0, first: li };
+      YEARS.push(byYear[y]);
+    }
+    byYear[y].count++;
+  });
+
+  newsMeta.textContent = NEWS.length + " entries · " +
+    YEARS[YEARS.length - 1].year + "–" + YEARS[0].year;
+
+  /* --- year markers --- */
+
+  var activeYear = null;
+
+  YEARS.forEach(function (rec) {
+    var b = el("button", "year");
+    b.type = "button";
+    b.setAttribute("data-year", rec.year);
+    b.setAttribute("aria-label",
+      "Jump to " + rec.year + ", " + rec.count + (rec.count === 1 ? " entry" : " entries"));
+    b.appendChild(el("span", "year__y", rec.year));
+    b.appendChild(el("span", "year__n", String(rec.count)));
+    b.addEventListener("click", function () { goToYear(rec); });
+    b.addEventListener("keydown", onYearKey);
+    yearNav.appendChild(b);
+    rec.btn = b;
+  });
+
+  function onYearKey(ev) {
+    var step = 0;
+    if (ev.key === "ArrowDown" || ev.key === "ArrowRight") step = 1;
+    else if (ev.key === "ArrowUp" || ev.key === "ArrowLeft") step = -1;
+    else if (ev.key === "Home") step = -YEARS.length;
+    else if (ev.key === "End") step = YEARS.length;
+    else return;
+    ev.preventDefault();
+    var here = YEARS.map(function (r) { return r.btn; }).indexOf(ev.currentTarget);
+    var next = Math.max(0, Math.min(YEARS.length - 1, here + step));
+    YEARS[next].btn.focus();
+  }
+
+  function reduceMotion() {
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }
+
+  /* The archive is its own scroll container on wide screens and flows with
+     the page on narrow ones; everything below works in either mode. */
+  function isPanel() {
+    return newsScroll.scrollHeight - newsScroll.clientHeight > 4;
+  }
+
+  function setActive(y) {
+    if (activeYear === y) return;
+    activeYear = y;
+    YEARS.forEach(function (r) {
+      if (r.year === y) r.btn.setAttribute("aria-current", "true");
+      else r.btn.removeAttribute("aria-current");
+    });
+    /* keep the active chip in view on the narrow strip, without moving the page */
+    if (yearNav.scrollWidth > yearNav.clientWidth + 1 && byYear[y]) {
+      var b = byYear[y].btn;
+      yearNav.scrollLeft = Math.max(0, b.offsetLeft - (yearNav.clientWidth - b.offsetWidth) / 2);
+    }
+  }
+
+  /* Active year is a pure function of scroll position, so it cannot flicker
+     at a boundary and behaves identically scrolling up or down. */
+  function currentYear() {
+    var viewTop, viewBottom, atEnd;
+    if (isPanel()) {
+      var r = newsScroll.getBoundingClientRect();
+      viewTop = r.top;
+      viewBottom = r.bottom;
+      atEnd = newsScroll.scrollTop + newsScroll.clientHeight >= newsScroll.scrollHeight - 2;
+    } else {
+      viewTop = stickyOffset();
+      viewBottom = window.innerHeight;
+      var listBottom = newsList.getBoundingClientRect().bottom;
+      atEnd = listBottom <= viewBottom + 2;
+    }
+
+    var line = viewTop + Math.min(104, Math.max(40, (viewBottom - viewTop) * 0.26));
+    var found = YEARS[0].year;
+    for (var i = 0; i < YEARS.length; i++) {
+      if (YEARS[i].first.getBoundingClientRect().top - line <= 1) found = YEARS[i].year;
+      else break;
+    }
+    if (atEnd) found = YEARS[YEARS.length - 1].year;
+    return found;
+  }
+
+  function stickyOffset() {
+    /* on narrow screens the chip strip sits above the list */
+    return isPanel() ? 0 : yearNav.getBoundingClientRect().height + 10;
+  }
+
+  function goToYear(rec) {
+    setActive(rec.year);
+    lock();
+    var behavior = reduceMotion() ? "auto" : "smooth";
+    if (isPanel()) {
+      newsScroll.scrollTo({ top: Math.max(0, rec.first.offsetTop - 6), behavior: behavior });
+    } else {
+      var top = window.pageYOffset + rec.first.getBoundingClientRect().top - stickyOffset() - 8;
+      window.scrollTo({ top: Math.max(0, top), behavior: behavior });
+    }
+  }
+
+  /* While a programmatic scroll is animating, hold the chosen year rather than
+     letting the spy repaint every frame on the way there. */
+  var locked = false, idleTimer = null, capTimer = null, frame = null;
+
+  function release() {
+    clearTimeout(idleTimer);
+    clearTimeout(capTimer);
+    locked = false;
+    sync();
+  }
+
+  function lock() {
+    locked = true;
+    clearTimeout(idleTimer);
+    clearTimeout(capTimer);
+    idleTimer = setTimeout(release, 180);
+    capTimer = setTimeout(release, 1400);
+  }
+
+  function sync() {
+    if (!newsScroll.offsetParent) return;   /* Home view is not on screen */
+    setActive(currentYear());
+  }
+
+  function onScroll() {
+    if (locked) {
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(release, 180);
+      return;
+    }
+    if (frame) return;
+    frame = requestAnimationFrame(function () { frame = null; sync(); });
+  }
+
+  newsScroll.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("scroll", onScroll, { passive: true });
+
+  function fitMode() {
+    if (!newsScroll.offsetParent) return;
+    /* a scrollable region needs to be keyboard reachable; a static one does not */
+    if (isPanel()) newsScroll.setAttribute("tabindex", "0");
+    else newsScroll.removeAttribute("tabindex");
+    sync();
+  }
+
+  window.addEventListener("resize", fitMode);
+  fitMode();
+
+  /* ============================================================
+     Selected publications (home)
+     ============================================================ */
+
+  var selected = document.getElementById("selectedPubs");
+  PUBS.filter(function (p) { return p.featured; }).forEach(function (p) {
+    selected.appendChild(pubNode(p));
+  });
+
+  /* ============================================================
+     Publications page — full list, grouped by year
+     ============================================================ */
+
+  var listEl = document.getElementById("pubList");
+
+  var years = [];
+  PUBS.forEach(function (p) {
+    if (years.indexOf(p.year) === -1) years.push(p.year);
+  });
+  years.sort(function (a, b) { return b - a; });
+
+  years.forEach(function (y) {
+    var group = PUBS.filter(function (p) { return p.year === y; });
+    if (!group.length) return;
+
+    var sec = el("section", "yeargroup");
+    var head = el("h3", "yeargroup__h");
+    head.appendChild(el("span", "num", String(y)));
+    head.appendChild(el("span", "yeargroup__n num", group.length + (group.length === 1 ? " entry" : " entries")));
+    sec.appendChild(head);
+    group.forEach(function (p) { sec.appendChild(pubNode(p)); });
+    listEl.appendChild(sec);
+  });
+
+  /* ============================================================
+     Routing — hash based, so it works under any sub-path
+     ============================================================ */
+
+  var ROUTES = [
+    { id: "home", title: "Sikai Cheng" },
+    { id: "publications", title: "Publications — Sikai Cheng" },
+    { id: "cv", title: "CV — Sikai Cheng" }
+  ];
+
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll(".nav a"));
+
+  function currentRoute() {
+    var raw = (location.hash || "").replace(/^#\/?/, "").toLowerCase();
+    for (var i = 0; i < ROUTES.length; i++) {
+      if (ROUTES[i].id === raw) return ROUTES[i];
+    }
+    return ROUTES[0];
+  }
+
+  function show(route, moveFocus) {
+    ROUTES.forEach(function (r) {
+      var v = document.getElementById("view-" + r.id);
+      if (!v) return;
+      if (r.id === route.id) {
+        v.hidden = false;
+        /* restart the entrance animation */
+        v.style.animation = "none";
+        void v.offsetWidth;
+        v.style.animation = "";
+      } else {
+        v.hidden = true;
+      }
+    });
+
+    var current = null;
+    navLinks.forEach(function (a) {
+      var isCurrent = a.getAttribute("href") === "#/" + route.id;
+      if (isCurrent) { a.setAttribute("aria-current", "page"); current = a; }
+      else a.removeAttribute("aria-current");
+    });
+
+    /* On the narrow horizontal strip, keep the active tab in view without moving the page. */
+    var strip = document.querySelector(".nav");
+    if (current && strip && strip.scrollWidth > strip.clientWidth + 1) {
+      strip.scrollLeft = Math.max(0, current.offsetLeft - (strip.clientWidth - current.offsetWidth) / 2);
+    }
+
+    document.title = route.title;
+
+    /* the news archive can only be measured while Home is on screen */
+    if (route.id === "home") fitMode();
+
+    if (moveFocus) {
+      var h = document.getElementById("t-" + route.id);
+      if (h) h.focus({ preventScroll: true });
+      window.scrollTo({ top: 0, behavior: "auto" });
+    }
+  }
+
+  window.addEventListener("hashchange", function () { show(currentRoute(), true); });
+  show(currentRoute(), false);
+})();
+</script>
+</body>
+</html>
