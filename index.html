@@ -340,6 +340,8 @@ a { color: inherit; }
 .news > li:last-child { border-bottom: 0; }
 .news__date { font-family: var(--mono); font-size: .75rem; color: var(--muted); font-variant-numeric: tabular-nums; padding-top: .22rem; white-space: nowrap; }
 .news__txt { font-size: .9688rem; line-height: 1.55; max-width: 58ch; }
+.news__txt a { color: var(--accent); text-decoration: none; text-underline-offset: .16em; }
+.news__txt a:hover, .news__txt a:focus-visible { color: var(--accent-ink); text-decoration: underline; }
 
 /* year timeline — a hairline rule with compact markers hung off it */
 .years {
@@ -864,14 +866,14 @@ a { color: inherit; }
   /* Newest first — the year timeline depends on this order. */
   /* Dates are the real ones except the last two, which are still approximate. */
   var NEWS = [
-    { date: "2026-09-25", text: "SkillsBench was accepted to NeurIPS 2026, Evaluations & Datasets Track." },
-    { date: "2026-08-21", text: "\"Plan, Verify and Fill\" was accepted to Findings of EMNLP 2026." },
-    { date: "2026-06-25", text: "Our survey on conformal prediction for reliable generative AI is available online and has been submitted for publication." },
+    { date: "2026-09-25", text: [{ text: "SkillsBench", href: "https://arxiv.org/abs/2602.12670" }, " was accepted to NeurIPS 2026, Evaluations & Datasets Track."] },
+    { date: "2026-08-21", text: [{ text: "Plan, Verify and Fill", href: "https://arxiv.org/abs/2601.12247" }, " was accepted to Findings of EMNLP 2026."] },
+    { date: "2026-06-25", text: ["Our ", { text: "survey on conformal prediction for reliable generative AI", href: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6963618" }, " is available online and has been submitted for publication."] },
     { date: "2026-05-18", text: "Joined Amazon in Seattle as an Applied Scientist Intern for the summer." },
-    { date: "2026-05-14", text: "CSI-4CAST was accepted to IEEE Transactions on Machine Learning in Communications and Networking." },
-    { date: "2025-11-12", text: "Presented SPOT at IEEE ICDM 2025 and received an ICDM Student Travel Award." },
-    { date: "2025-10-14", text: "Our contextual stochastic optimization paper was published online in Manufacturing & Service Operations Management." },
-    { date: "2025-05-28", text: "DualSchool, a benchmark on LLM reliability for optimization education, was released as a preprint." },
+    { date: "2026-05-14", text: [{ text: "CSI-4CAST", href: "https://ieeexplore.ieee.org/document/11526994" }, " was accepted to IEEE Transactions on Machine Learning in Communications and Networking."] },
+    { date: "2025-11-12", text: ["Presented ", { text: "SPOT", href: "https://arxiv.org/pdf/2504.09680" }, " at IEEE ICDM 2025 and received an ICDM Student Travel Award."] },
+    { date: "2025-10-14", text: ["Our ", { text: "contextual stochastic optimization paper", href: "https://arxiv.org/pdf/2409.06918" }, " was published online in Manufacturing & Service Operations Management."] },
+    { date: "2025-05-28", text: [{ text: "DualSchool", href: "https://arxiv.org/abs/2505.21775" }, ", a benchmark on LLM reliability for optimization education, was released as a preprint."] },
     { date: "2024-08-19", text: "Started my Ph.D. in Machine Learning at Georgia Tech, advised by Prof. Pascal Van Hentenryck." },
     { date: "2023-12-15", text: "Completed my M.S. in Operations Research at Georgia Tech." }
   ];
@@ -1039,7 +1041,19 @@ a { color: inherit; }
     var t = el("time", "news__date", prettyDate(n.date));
     t.setAttribute("datetime", n.date);
     li.appendChild(t);
-    li.appendChild(el("p", "news__txt", n.text));
+    var text = el("p", "news__txt");
+    var parts = Array.isArray(n.text) ? n.text : [n.text];
+    parts.forEach(function (part) {
+      if (typeof part === "string") {
+        text.appendChild(document.createTextNode(part));
+      } else {
+        var link = el("a", null, part.text);
+        link.href = part.href;
+        link.rel = "noopener noreferrer";
+        text.appendChild(link);
+      }
+    });
+    li.appendChild(text);
     newsList.appendChild(li);
 
     if (!byYear[y]) {
