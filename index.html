@@ -33,8 +33,8 @@
   --accent:     #185C96;
   --accent-ink: #10426B;
   --accent-soft:#E3EDF7;
-  --news-accent: #6F425F;
-  --news-accent-ink: #543249;
+  --content-link: #6F425F;
+  --content-link-hover: #543249;
   --flag:       #185C96;
   --flag-soft:  #E3EDF7;
   --mark:       #D8E8F5;
@@ -342,8 +342,8 @@ a { color: inherit; }
 .news > li:last-child { border-bottom: 0; }
 .news__date { font-family: var(--mono); font-size: .75rem; color: var(--muted); font-variant-numeric: tabular-nums; padding-top: .22rem; white-space: nowrap; }
 .news__txt { font-size: .9688rem; line-height: 1.55; max-width: 58ch; }
-.news__txt a { color: var(--news-accent); text-decoration: none; text-underline-offset: .16em; }
-.news__txt a:hover, .news__txt a:focus-visible { color: var(--news-accent-ink); text-decoration: underline; }
+.news__txt a, #view-home .view__lede a, #view-home .prose a { color: var(--content-link); text-decoration: none; text-underline-offset: .16em; }
+.news__txt a:is(:hover, :focus-visible), #view-home .view__lede a:is(:hover, :focus-visible), #view-home .prose a:is(:hover, :focus-visible) { color: var(--content-link-hover); text-decoration: underline; }
 
 /* year timeline — a hairline rule with compact markers hung off it */
 .years {
@@ -876,7 +876,7 @@ a { color: inherit; }
     { date: "2025-11-12", text: ["Presented ", { text: "SPOT", href: "https://arxiv.org/pdf/2504.09680" }, " at IEEE ICDM 2025 and received an ICDM Student Travel Award."] },
     { date: "2025-10-14", text: ["Our ", { text: "contextual stochastic optimization paper", href: "https://arxiv.org/pdf/2409.06918" }, " was published online in Manufacturing & Service Operations Management."] },
     { date: "2025-05-28", text: [{ text: "DualSchool", href: "https://arxiv.org/abs/2505.21775" }, ", a benchmark on LLM reliability for optimization education, was released as a preprint."] },
-    { date: "2024-08-19", text: "Started my Ph.D. in Machine Learning at Georgia Tech, advised by Prof. Pascal Van Hentenryck." },
+    { date: "2024-08-19", text: ["Started my Ph.D. in Machine Learning at Georgia Tech, advised by ", { text: "Prof. Pascal Van Hentenryck", href: "https://sites.gatech.edu/pascal-van-hentenryck/" }, "."] },
     { date: "2023-12-15", text: "Completed my M.S. in Operations Research at Georgia Tech." }
   ];
 
