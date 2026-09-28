@@ -298,6 +298,9 @@ a { color: inherit; }
 .textbtn svg { width: 11px; height: 11px; stroke: currentColor; fill: none; stroke-width: 1.6; transition: transform .2s ease; }
 .textbtn[aria-expanded="true"] svg { transform: rotate(180deg); }
 
+.news-actions { display: flex; align-items: baseline; justify-content: flex-end; flex-wrap: wrap; gap: .5rem 1rem; }
+.news-toggle { font-size: .875rem; min-height: 2rem; white-space: nowrap; }
+
 /* news — the whole archive stays in the document and scrolls;
    a year timeline sits beside it and tracks what is in view */
 .newswrap {
@@ -330,6 +333,7 @@ a { color: inherit; }
 .newsscroll::-webkit-scrollbar-track { background: transparent; }
 .newsscroll::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 3px; }
 .newsscroll::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+.newsscroll.is-expanded { max-height: none; overflow-y: visible; padding-right: 0; background-image: none; }
 
 .news { list-style: none; margin: 0; padding: 0; }
 .news > li { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); gap: 0 1.25rem; padding: .68rem 0; border-bottom: 1px solid var(--rule-soft); }
@@ -583,6 +587,7 @@ a { color: inherit; }
 /* narrow: the archive flows with the page and the timeline becomes a
    horizontally scrollable chip strip, sticky only within the News section */
 @media (max-width: 44rem) {
+  .news-toggle { display: none; }
   .newswrap { grid-template-columns: minmax(0, 1fr); gap: 0; }
   .newsscroll {
     max-height: none;
@@ -735,7 +740,13 @@ a { color: inherit; }
       <section class="block" aria-labelledby="b-news">
         <div class="block__head">
           <h3 class="block__title" id="b-news">News</h3>
-          <p class="meta block__more" id="newsMeta"></p>
+          <div class="news-actions block__more">
+            <p class="meta" id="newsMeta"></p>
+            <button class="textbtn news-toggle" id="newsToggle" type="button" aria-expanded="false" aria-controls="newsScroll">
+              <span id="newsToggleLabel">Expand all news</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+            </button>
+          </div>
         </div>
         <div class="newswrap">
           <div class="newsscroll" id="newsScroll" role="region" aria-labelledby="b-news">
@@ -1008,6 +1019,8 @@ a { color: inherit; }
   var newsScroll = document.getElementById("newsScroll");
   var yearNav = document.getElementById("yearNav");
   var newsMeta = document.getElementById("newsMeta");
+  var newsToggle = document.getElementById("newsToggle");
+  var newsToggleLabel = document.getElementById("newsToggleLabel");
   var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
   function prettyDate(iso) {
@@ -1122,7 +1135,7 @@ a { color: inherit; }
 
   function stickyOffset() {
     /* on narrow screens the chip strip sits above the list */
-    return isPanel() ? 0 : yearNav.getBoundingClientRect().height + 10;
+    return window.matchMedia("(max-width: 44rem)").matches ? yearNav.getBoundingClientRect().height + 10 : 0;
   }
 
   function goToYear(rec) {
@@ -1181,6 +1194,15 @@ a { color: inherit; }
     else newsScroll.removeAttribute("tabindex");
     sync();
   }
+
+  newsToggle.addEventListener("click", function () {
+    var expanded = newsToggle.getAttribute("aria-expanded") !== "true";
+    newsScroll.classList.toggle("is-expanded", expanded);
+    newsToggle.setAttribute("aria-expanded", String(expanded));
+    newsToggleLabel.textContent = expanded ? "Collapse news" : "Expand all news";
+    newsScroll.scrollTop = 0;
+    fitMode();
+  });
 
   window.addEventListener("resize", fitMode);
   fitMode();
