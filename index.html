@@ -287,6 +287,7 @@ a { color: inherit; }
 .prose { max-width: var(--measure); font-size: 1.0625rem; line-height: 1.72; }
 .prose + .prose { margin-top: 1rem; }
 .prose em { font-style: italic; }
+.prose strong { font-weight: 600; color: var(--ink); }
 
 .textbtn {
   appearance: none; background: none; border: 0; cursor: pointer;
@@ -415,6 +416,18 @@ a { color: inherit; }
   color: var(--accent);
   letter-spacing: .03em;
   padding-top: .26rem;
+  white-space: pre-line;
+}
+.pub__side { display: flex; flex-direction: column; gap: .6rem; }
+.pub__note {
+  font-family: var(--mono);
+  font-size: .6875rem;
+  letter-spacing: .03em;
+  color: var(--muted);
+  white-space: pre-line;
+  padding-top: .55rem;
+  border-top: 1px solid var(--rule);
+  max-width: 5.5rem;
 }
 .pub__body { min-width: 0; display: flex; flex-direction: column; gap: .3rem; }
 .pub__title { font-size: 1.0625rem; font-weight: 500; line-height: 1.34; color: var(--ink); }
@@ -453,6 +466,24 @@ a { color: inherit; }
   transition: border-color .16s ease, color .16s ease, background-color .16s ease;
 }
 .pill:hover { color: var(--accent-ink); border-color: var(--accent); background: var(--accent-soft); }
+
+/* research-area filter on the publications page */
+.areabar { display: flex; flex-wrap: wrap; gap: .45rem; margin-bottom: 1.75rem; }
+.chip {
+  appearance: none; cursor: pointer;
+  font-family: var(--sans);
+  font-size: .8125rem;
+  color: var(--muted);
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: .3rem .8rem .34rem;
+  display: inline-flex; align-items: baseline; gap: .4rem;
+  transition: border-color .16s ease, color .16s ease, background-color .16s ease;
+}
+.chip:hover { color: var(--accent-ink); border-color: var(--accent); background: var(--accent-soft); }
+.chip[aria-pressed="true"] { color: var(--card); background: var(--accent); border-color: var(--accent); }
+.chip__n { font-family: var(--mono); font-size: .6875rem; opacity: .75; font-variant-numeric: tabular-nums; }
 
 /* filters */
 .filters {
@@ -698,7 +729,7 @@ a { color: inherit; }
 
     <nav class="nav" aria-label="Sections">
       <a href="#/home">Home</a>
-      <a href="#/publications">Publications<span class="nav__count"><span class="sr-only">, </span>8<span class="sr-only"> entries</span></span></a>
+      <a href="#/publications">Publications<span class="nav__count"><span class="sr-only">, </span>9<span class="sr-only"> entries</span></span></a>
       <a href="#/cv">CV</a>
     </nav>
 
@@ -715,11 +746,7 @@ a { color: inherit; }
           I am a Ph.D. student in Machine Learning at the
           <a href="https://www.gatech.edu/" rel="noopener noreferrer">Georgia Institute of Technology</a>,
           advised by <a href="https://sites.gatech.edu/pascal-van-hentenryck/" rel="noopener noreferrer">Prof. Pascal Van Hentenryck</a>.
-          My research focuses on machine learning and its integration with optimization. I have made
-          several attempts in applying these methods to large-scale transportation systems,
-          wireless communications, and robust decision-making under uncertainty. In addition, I explore the
-          reasoning capabilities of large language models and investigate reinforcement learning approaches
-          for multi-agent systems.
+          I work on agentic AI: benchmarking what agents can do, and using them to evolve algorithms.
         </p>
       </header>
 
@@ -738,6 +765,20 @@ a { color: inherit; }
           <a href="https://sds.cuhk.edu.cn/en/teacher/63" rel="noopener noreferrer">Prof. Xinyun Chen</a> and
           <a href="https://web.ics.purdue.edu/~shi178/" rel="noopener noreferrer">Prof. Pengyi Shi</a>
           during my undergraduate studies.
+        </p>
+      </section>
+
+      <section class="block" aria-labelledby="b-interests">
+        <div class="block__head">
+          <h3 class="block__title" id="b-interests">Research interests</h3>
+        </div>
+        <p class="prose">
+          My research focuses on <strong>agentic AI</strong>, particularly <strong>benchmarking agent capabilities</strong>
+          and using LLM agents for <strong>algorithm evolution</strong> and <strong>recursive self-improvement</strong>.
+          I also study the efficiency and reliability of <strong>language models</strong>.
+          In addition, I have worked on <strong>ML-integrated optimization</strong> for <strong>large-scale logistics</strong>,
+          <strong>deep time-series forecasting</strong> for <strong>5G wireless communication</strong>,
+          and <strong>multi-agent reinforcement learning</strong>.
         </p>
       </section>
 
@@ -764,7 +805,7 @@ a { color: inherit; }
         <div class="block__head">
           <h3 class="block__title" id="b-selected">Selected publications</h3>
           <a class="textbtn block__more" href="#/publications">
-            Full list (8)
+            Full list (9)
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg>
           </a>
         </div>
@@ -782,6 +823,7 @@ a { color: inherit; }
         </p>
       </header>
 
+      <div class="areabar" id="areaBar" role="group" aria-label="Filter publications by research area"></div>
       <div class="pubs" id="pubList"></div>
     </section>
 
@@ -853,7 +895,7 @@ a { color: inherit; }
     <p class="foot__txt">
       Sikai Cheng — Ph.D. student in Machine Learning, Georgia Institute of Technology.
     </p>
-    <p class="foot__stamp">Last updated 2026-09</p>
+    <p class="foot__stamp">Last updated 2026-10</p>
   </div>
 </footer>
 
@@ -868,7 +910,9 @@ a { color: inherit; }
   /* Newest first — the year timeline depends on this order. */
   /* Dates are the real ones except the last two, which are still approximate. */
   var NEWS = [
+    { date: "2026-09-30", text: [{ text: "OPTAgent", href: "https://openreview.net/forum?id=ydWJ4mL4nu" }, " was accepted to the NeurIPS 2026 Workshop on ML × OR (MLxOR)."] },
     { date: "2026-09-25", text: [{ text: "SkillsBench", href: "https://arxiv.org/abs/2602.12670" }, " was accepted to NeurIPS 2026, Evaluations & Datasets Track."] },
+    { date: "2026-09-18", text: [{ text: "Plan, Verify and Fill", href: "https://arxiv.org/abs/2601.12247" }, " was selected for a spotlight presentation at the NonAR-LM Workshop at COLM 2026."] },
     { date: "2026-08-21", text: [{ text: "Plan, Verify and Fill", href: "https://arxiv.org/abs/2601.12247" }, " was accepted to Findings of EMNLP 2026."] },
     { date: "2026-06-25", text: ["Our ", { text: "survey on conformal prediction for reliable generative AI", href: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6963618" }, " is available online and has been submitted for publication."] },
     { date: "2026-05-18", text: "Joined Amazon in Seattle as an Applied Scientist Intern for the summer." },
@@ -882,7 +926,15 @@ a { color: inherit; }
 
   var PUBS = [
     {
-      id: "Under review", year: 2026, topics: ["Generative AI", "Conformal Prediction", "Uncertainty Quantification"],
+      id: "NeurIPS WS\nMLxOR", year: 2026, area: "Agentic AI", topics: ["AI Agents", "Self-Evolving Algorithms"], featured: true,
+      title: "OPTAgent: From Standalone Solvers to Deployment-Aware Solver Ecosystems",
+      authors: ["Jiang, H.", "Guan, C.", "Li, M.", "Li, D.", "Cheng, S.", "Van Hentenryck, P.", "Bent, R."],
+      venue: "NeurIPS 2026 Workshop on Mathematical Foundations and Operational Integration of ML for Uncertainty-Aware Decision-Making (MLxOR)", venueShort: "NeurIPS Workshop",
+      summary: "An agentic policy-synthesis framework in which an LLM searches compact decision-tree policies that select solver methods and allocate compute budgets across a toolbox of optimization solvers; the compiled deterministic policy replaces the LLM at deployment.",
+      links: { PDF: "https://openreview.net/forum?id=ydWJ4mL4nu" }
+    },
+    {
+      id: "Under review", year: 2026, area: "Language Models", topics: ["Generative AI", "Conformal Prediction", "Uncertainty Quantification"],
       title: "Toward Reliable Generative AI with Conformal Prediction: A Survey",
       authors: ["Bruys, T.", "Cheng, S.", "Moradi, A.", "Van Hentenryck, P.", "Zandehshahvar, R."],
       venue: "Manuscript submitted for publication", venueShort: "Preprint",
@@ -890,15 +942,15 @@ a { color: inherit; }
       links: { PDF: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6963618", Code: "https://github.com/AI4OPT/conformal-prediction-generative-ai" }
     },
     {
-      id: "EMNLP Findings", year: 2026, topics: ["Language Models", "Diffusion Models"], featured: true,
+      id: "EMNLP Findings", idNote: "COLM WS\nSpotlight", year: 2026, area: "Language Models", topics: ["Language Models", "Diffusion Models"], featured: true,
       title: "Plan, Verify and Fill: A Structured Parallel Decoding Approach for Diffusion Language Models",
       authors: ["Li, M.", "Jiang, H.", "Cheng, S.", "Fu, H.", "Cai, Y.", "Huang, B.", "Chen, Z.", "Ye, T.", "Chen, X.", "Van Hentenryck, P."],
-      venue: "Findings of the Association for Computational Linguistics: EMNLP 2026", venueShort: "EMNLP Findings",
+      venue: "Findings of the Association for Computational Linguistics: EMNLP 2026 — Spotlight, NonAR-LM Workshop at COLM 2026", venueShort: "EMNLP Findings",
       summary: "A training-free decoding method for diffusion language models that verifies informative low-confidence tokens, reducing forward passes by 43–65% and raising throughput up to 2.3× at comparable accuracy.",
       links: { PDF: "https://arxiv.org/abs/2601.12247" }
     },
     {
-      id: "TMLCN", year: 2026, topics: ["Forecasting", "Wireless Communications"], featured: true,
+      id: "TMLCN", year: 2026, area: "Time Series Forecasting", topics: ["Forecasting", "Wireless Communications"], featured: true,
       title: "CSI-4CAST: A Hybrid Deep Learning Model for CSI Prediction with Comprehensive Robustness and Generalization Testing",
       authors: ["Cheng, S.", "Zandehshahvar, R.", "Zhao, H.", "Garcia-Ulloa, D. A.", "Villena-Rodriguez, A.", "Navarro Manchón, C.", "Van Hentenryck, P."],
       venue: "IEEE Transactions on Machine Learning in Communications and Networking, vol. 4, pp. 882–912", venueShort: "TMLCN",
@@ -906,7 +958,7 @@ a { color: inherit; }
       links: { PDF: "https://ieeexplore.ieee.org/document/11526994", Code: "https://github.com/AI4OPT/CSI-4CAST", Dataset: "https://huggingface.co/CSI-4CAST" }
     },
     {
-      id: "NeurIPS ED", year: 2026, topics: ["Language Models", "AI Agents"], featured: true,
+      id: "NeurIPS ED", year: 2026, area: "Agentic AI", topics: ["Language Models", "AI Agents"], featured: true,
       title: "SkillsBench: Benchmarking How Well Agent Skills Work Across Diverse Tasks",
       authors: ["Li, X.", "Liu, Y.", "Chen, W.", "You, B.", "Di, Z.", "…", "Cheng, S.", "…", "Song, D."],
       venue: "NeurIPS 2026, Evaluations & Datasets Track", venueShort: "NeurIPS ED",
@@ -914,7 +966,7 @@ a { color: inherit; }
       links: { PDF: "https://arxiv.org/abs/2602.12670", Code: "https://github.com/benchflow-ai/skillsbench" }
     },
     {
-      id: "ICDM", year: 2025, topics: ["ML + Optimization", "Transportation"], featured: true,
+      id: "ICDM", year: 2025, area: "ML-Integrated Optimization", topics: ["ML + Optimization", "Transportation"], featured: true,
       title: "SPOT: Spatio-Temporal Pattern Mining and Optimization for Load Consolidation in Freight Transportation Networks",
       authors: ["Cheng, S.", "Hijazi, A.", "Konak, J.", "Erera, A.", "Van Hentenryck, P."],
       venue: "Proceedings of the IEEE International Conference on Data Mining (ICDM), acceptance rate 13%", venueShort: "ICDM",
@@ -922,7 +974,7 @@ a { color: inherit; }
       links: { PDF: "https://arxiv.org/pdf/2504.09680" }
     },
     {
-      id: "M&SOM", year: 2025, topics: ["ML + Optimization", "Stochastic Optimization"], featured: true,
+      id: "M&SOM", year: 2025, area: "ML-Integrated Optimization", topics: ["ML + Optimization", "Stochastic Optimization"], featured: true,
       title: "Contextual stochastic optimization for omnichannel multi-courier order fulfillment under delivery time uncertainty",
       authors: ["Ye, T.", "Cheng, S.", "Hijazi, A.", "Van Hentenryck, P."],
       venue: "Manufacturing & Service Operations Management (M&SOM) — Honorary Mention, M&SOM Practice-Based Research Competition", venueShort: "M&SOM",
@@ -930,7 +982,7 @@ a { color: inherit; }
       links: { PDF: "https://arxiv.org/pdf/2409.06918" }
     },
     {
-      id: "Preprint", year: 2025, topics: ["Language Models", "ML + Optimization"],
+      id: "Preprint", year: 2025, area: "Language Models", topics: ["Language Models", "ML + Optimization"],
       title: "DualSchool: How reliable are LLMs for optimization education?",
       authors: ["Klamkin, M.", "Deza, A.", "Cheng, S.", "Zhao, H.", "Van Hentenryck, P."],
       venue: "arXiv preprint arXiv:2505.21775", venueShort: "Preprint",
@@ -938,7 +990,7 @@ a { color: inherit; }
       links: { PDF: "https://arxiv.org/abs/2505.21775" }
     },
     {
-      id: "NeurIPS WS", year: 2022, topics: ["Reinforcement Learning", "Multi-Agent Systems"],
+      id: "NeurIPS WS", year: 2022, area: "Multi-Agent RL", topics: ["Reinforcement Learning", "Multi-Agent Systems"],
       title: "Emergent collective intelligence from massive-agent cooperation and competition",
       authors: ["Chen, H.", "Tao, S.", "Chen, J.", "Shen, W.", "Li, X.", "Cheng, S.", "Zhu, X.", "Li, X."],
       venue: "NeurIPS 2022 Deep Reinforcement Learning Workshop", venueShort: "NeurIPS Workshop",
@@ -978,8 +1030,10 @@ a { color: inherit; }
   function pubNode(p) {
     var row = el("article", "pub");
 
-    var id = el("p", "pub__id", p.id);
-    row.appendChild(id);
+    var side = el("div", "pub__side");
+    side.appendChild(el("p", "pub__id", p.id));
+    if (p.idNote) side.appendChild(el("p", "pub__note", p.idNote));
+    row.appendChild(side);
 
     var body = el("div", "pub__body");
 
@@ -1233,29 +1287,53 @@ a { color: inherit; }
   });
 
   /* ============================================================
-     Publications page — full list, grouped by year
+     Publications page — full list, grouped by year, filterable by area
      ============================================================ */
 
   var listEl = document.getElementById("pubList");
+  var areaBar = document.getElementById("areaBar");
 
-  var years = [];
-  PUBS.forEach(function (p) {
-    if (years.indexOf(p.year) === -1) years.push(p.year);
+  var ALL = "All";
+  var AREAS = ["Agentic AI", "Language Models", "ML-Integrated Optimization", "Time Series Forecasting", "Multi-Agent RL"];
+
+  function renderPubs(area) {
+    var shown = area === ALL ? PUBS : PUBS.filter(function (p) { return p.area === area; });
+    listEl.textContent = "";
+
+    var years = [];
+    shown.forEach(function (p) {
+      if (years.indexOf(p.year) === -1) years.push(p.year);
+    });
+    years.sort(function (a, b) { return b - a; });
+
+    years.forEach(function (y) {
+      var group = shown.filter(function (p) { return p.year === y; });
+      var sec = el("section", "yeargroup");
+      var head = el("h3", "yeargroup__h");
+      head.appendChild(el("span", "num", String(y)));
+      head.appendChild(el("span", "yeargroup__n num", group.length + (group.length === 1 ? " entry" : " entries")));
+      sec.appendChild(head);
+      group.forEach(function (p) { sec.appendChild(pubNode(p)); });
+      listEl.appendChild(sec);
+    });
+  }
+
+  var chips = [ALL].concat(AREAS).map(function (area) {
+    var n = area === ALL ? PUBS.length : PUBS.filter(function (p) { return p.area === area; }).length;
+    var b = el("button", "chip");
+    b.type = "button";
+    b.setAttribute("aria-pressed", String(area === ALL));
+    b.appendChild(el("span", null, area));
+    b.appendChild(el("span", "chip__n", String(n)));
+    b.addEventListener("click", function () {
+      chips.forEach(function (c) { c.setAttribute("aria-pressed", String(c === b)); });
+      renderPubs(area);
+    });
+    areaBar.appendChild(b);
+    return b;
   });
-  years.sort(function (a, b) { return b - a; });
 
-  years.forEach(function (y) {
-    var group = PUBS.filter(function (p) { return p.year === y; });
-    if (!group.length) return;
-
-    var sec = el("section", "yeargroup");
-    var head = el("h3", "yeargroup__h");
-    head.appendChild(el("span", "num", String(y)));
-    head.appendChild(el("span", "yeargroup__n num", group.length + (group.length === 1 ? " entry" : " entries")));
-    sec.appendChild(head);
-    group.forEach(function (p) { sec.appendChild(pubNode(p)); });
-    listEl.appendChild(sec);
-  });
+  renderPubs(ALL);
 
   /* ============================================================
      Routing — hash based, so it works under any sub-path
