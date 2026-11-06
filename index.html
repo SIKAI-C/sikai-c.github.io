@@ -729,7 +729,7 @@ a { color: inherit; }
 
     <nav class="nav" aria-label="Sections">
       <a href="#/home">Home</a>
-      <a href="#/publications">Publications<span class="nav__count"><span class="sr-only">, </span>9<span class="sr-only"> entries</span></span></a>
+      <a href="#/publications">Publications<span class="nav__count"><span class="sr-only">, </span>10<span class="sr-only"> entries</span></span></a>
       <a href="#/cv">CV</a>
     </nav>
 
@@ -806,7 +806,7 @@ a { color: inherit; }
         <div class="block__head">
           <h3 class="block__title" id="b-selected">Selected publications</h3>
           <a class="textbtn block__more" href="#/publications">
-            Full list (9)
+            Full list (10)
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg>
           </a>
         </div>
@@ -911,6 +911,7 @@ a { color: inherit; }
   /* Newest first — the year timeline depends on this order. */
   /* Dates are the real ones except the last two, which are still approximate. */
   var NEWS = [
+    { date: "2026-10-28", text: [{ text: "DecompGym", href: "https://arxiv.org/abs/2610.38175" }, ", a benchmark for LLM agents designing decomposition algorithms, was released as a preprint with open-source code."] },
     { date: "2026-09-30", text: [{ text: "OPTAgent", href: "https://openreview.net/forum?id=ydWJ4mL4nu" }, " was accepted to the NeurIPS 2026 Workshop on ML × OR (MLxOR)."] },
     { date: "2026-09-25", text: [{ text: "SkillsBench", href: "https://arxiv.org/abs/2602.12670" }, " was accepted to NeurIPS 2026, Evaluations & Datasets Track."] },
     { date: "2026-09-18", text: [{ text: "Plan, Verify and Fill", href: "https://arxiv.org/abs/2601.12247" }, " was selected for a spotlight presentation at the NonAR-LM Workshop at COLM 2026."] },
@@ -926,6 +927,14 @@ a { color: inherit; }
   ];
 
   var PUBS = [
+    {
+      id: "Preprint", year: 2026, area: "Agentic AI", topics: ["AI Agents", "Benchmarking", "ML + Optimization"], featured: true,
+      title: "DecompGym: Benchmarking LLM Agents on Designing Decomposition Algorithms",
+      authors: ["Cheng, S.", "Ye, T.", "Deza, A.", "Qi, X.", "Li, M.", "Liu, L.", "Guan, C."],
+      venue: "arXiv preprint arXiv:2610.38175", venueShort: "Preprint",
+      summary: "A benchmark of 81 instances across nine problem families in which coding agents implement Benders decomposition or column generation, with solvers checked for runtime, feasibility, an LLM-judged method audit and optimality; reflection on failures repairs far more attempts than regeneration.",
+      links: { PDF: "https://arxiv.org/abs/2610.38175", Code: "https://github.com/SIKAI-C/DecompGym" }
+    },
     {
       id: "NeurIPS WS\nMLxOR", year: 2026, area: "Agentic AI", topics: ["AI Agents", "Self-Evolving Algorithms"], featured: true,
       title: "OPTAgent: From Standalone Solvers to Deployment-Aware Solver Ecosystems",
@@ -959,7 +968,7 @@ a { color: inherit; }
       links: { PDF: "https://ieeexplore.ieee.org/document/11526994", Code: "https://github.com/AI4OPT/CSI-4CAST", Dataset: "https://huggingface.co/CSI-4CAST" }
     },
     {
-      id: "NeurIPS ED", year: 2026, area: "Agentic AI", topics: ["Language Models", "AI Agents"], featured: true,
+      id: "NeurIPS ED", year: 2026, area: "Agentic AI", topics: ["Language Models", "AI Agents", "Benchmarking"], featured: true,
       title: "SkillsBench: Benchmarking How Well Agent Skills Work Across Diverse Tasks",
       authors: ["Li, X.", "Liu, Y.", "Chen, W.", "You, B.", "Di, Z.", "…", "Cheng, S.", "…", "Song, D."],
       venue: "NeurIPS 2026, Evaluations & Datasets Track", venueShort: "NeurIPS ED",
